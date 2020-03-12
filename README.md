@@ -6,6 +6,19 @@ Plugin which extends simba jdbc `AdfsCredentialsProvider` with MFA functionality
 ```shell script
 ./gradlew clean build
 ```
+## Which MFA supported
+Mobile App like Microsoft Authenticator
+
+## How it works
+It sends few requests to IdP host in order to get SAML assertion
+
+1. HTTPs GET login form
+   1. process the get response to collect inputs for login form
+1. HTTPs POST x-www-form-urlencoded username and password
+   1. process the post response to collect inputs for mfa form (auto submit)
+1. HTTPs POST x-www-form-urlencoded inputs for MFA auto submit form
+   1. process response to get SAML assertion
+1. assume preferred role with SAML assertion to get temporary credentials
 
 ## How to use?
 1. build it first
